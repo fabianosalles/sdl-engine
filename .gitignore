@@ -35,3 +35,4 @@
 /build/
 **/.vs
 **/Debug/
+**/*.vcxproj.user
