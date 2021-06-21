@@ -2,12 +2,16 @@
 #include "Game.h"
 
 
-bool Game::init(const char* title, int x, int y, int w, int h, int flags) {
+bool Game::init(const char* title, int x, int y, int w, int h, bool fullscreen) {
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
 		std::cout << "SDL init failed\n";
 		return false;
 	}
 	
+	int flags = 0;
+	if (fullscreen)
+		flags = SDL_WINDOW_FULLSCREEN;
+
 	_window = SDL_CreateWindow(title, x, y, w, h, flags);
 	if (_window == NULL) {
 		std::cout << "SDL create window failed\n";
