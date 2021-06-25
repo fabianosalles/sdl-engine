@@ -1,14 +1,23 @@
 #include <iostream>
 #include <SDL.h>
+#include "Game.h"
 
+
+Game* game = NULL;
 
 int main(int argc, char** argv) {
-
-	if (SDL_Init(SDL_INIT_EVERYTHING) >= 0) {
-		std::cout << "yeah\n";
+	game = new Game();
+	game->init("Chapter 1 : Setting Up SDL",
+		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+		800, 600);
+	while (game->running())
+	{
+		game->handleEvents();
+		game->update();
+		game->render();
 	}
-
-	SDL_Quit();
-
+	game->clean();
+	delete game;
 	return EXIT_SUCCESS;
+
 }
