@@ -6,6 +6,16 @@
 class TextureManager
 {
 public:
+	static auto& instance() {
+		static TextureManager _instance;
+		return _instance;
+	}
+
+	TextureManager(const TextureManager&) = delete;
+	TextureManager& operator=(const TextureManager&) = delete;
+	TextureManager(TextureManager&&) = delete;
+	TextureManager& operator=(TextureManager&&) = delete;
+
 	bool load(std::string fileName, std::string id, SDL_Renderer* renderer);
 	
 	void draw(std::string id, int x, int y, int w, int h, 
@@ -15,7 +25,9 @@ public:
 	void drawFrame(std::string id, int x, int y, int w, int h, int riw, int frame, 
 		SDL_Renderer* renderer, 
 		SDL_RendererFlip flip = SDL_FLIP_NONE);
+
 private:
+	TextureManager() {}
 	std::map<std::string, SDL_Texture*> _textures;
 };
 

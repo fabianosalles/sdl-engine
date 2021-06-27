@@ -1,7 +1,6 @@
 #pragma once
 
 #include <SDL.h>
-#include "TextureManager.h"
 
 class Game
 {
@@ -21,6 +20,5 @@ private:
 	SDL_Renderer* _renderer;
 
 	int _currentFrame;
-	TextureManager _textureManager;
 };
 
