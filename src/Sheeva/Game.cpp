@@ -1,5 +1,9 @@
 #include <iostream>
+
 #include "Game.h"
+#include "TextureManager.h"
+#include "Player.h"
+#include "Enemy.h"
 
 
 bool Game::init(const char* title, int x, int y, int w, int h, bool fullscreen) {
@@ -26,12 +30,23 @@ bool Game::init(const char* title, int x, int y, int w, int h, bool fullscreen) 
 	SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255);
 
 	std::cout << "SDL init success\n";
+
+	std::cout << "Loading assets...\n";
+	TextureManager::instance().load("assets/animate-alpha.png", "animate", _renderer);
+
+	_objects.push_back(new Player(new LoaderParams(100, 100, 128, 82, "animate")));
+	_objects.push_back(new Enemy(new LoaderParams(300, 300, 128, 82, "animate")));
+
 	_running = true;
 	return true;
 }
 
 void Game::render() {
 	SDL_RenderClear(_renderer);
+
+	for (auto object : _objects) 
+		object->draw();
+
 	SDL_RenderPresent(_renderer);
 }
 
@@ -57,5 +72,7 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
+	for (auto object : _objects)
+		object->update();
 
 }
