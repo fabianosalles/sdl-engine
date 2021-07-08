@@ -1,12 +1,14 @@
 #pragma once
-#include "GameObject.h"
 
-class Enemy : public GameObject
-{
+#include "SDLGameObject.h"
+#include "LoaderParams.h"
+
+class Enemy : public SDLGameObject {
 public:
-	void load(int x, int y, int w, int h, std::string textureID);
-	void draw(SDL_Renderer* renderer);
-	void update();
-	void clean();
+	Enemy(const LoaderParams* params) : SDLGameObject(params) { };
+
+	virtual void draw() { SDLGameObject::draw(); }
+	virtual void update() { y += 1; }
+	virtual void clean() {  }
 };
 

@@ -2,6 +2,8 @@
 
 #include "Game.h"
 #include "TextureManager.h"
+#include "Player.h"
+#include "Enemy.h"
 
 
 bool Game::init(const char* title, int x, int y, int w, int h, bool fullscreen) {
@@ -32,17 +34,8 @@ bool Game::init(const char* title, int x, int y, int w, int h, bool fullscreen) 
 	std::cout << "Loading assets...\n";
 	TextureManager::instance().load("assets/animate-alpha.png", "animate", _renderer);
 
-	player = new Player();
-	go = new GameObject();
-	enemy = new Enemy();
-
-	player->load(100, 100, 128, 82, "animate");
-	go->load(300, 300, 128, 82, "animate");
-	enemy->load(0, 0, 128, 82, "animate");
-
-	objects.push_back(player);
-	objects.push_back(go);
-	objects.push_back(enemy);
+	_objects.push_back(new Player(new LoaderParams(100, 100, 128, 82, "animate")));
+	_objects.push_back(new Enemy(new LoaderParams(300, 300, 128, 82, "animate")));
 
 	_running = true;
 	return true;
@@ -51,8 +44,8 @@ bool Game::init(const char* title, int x, int y, int w, int h, bool fullscreen) 
 void Game::render() {
 	SDL_RenderClear(_renderer);
 
-	for (auto object : objects) 
-		object->draw(_renderer);
+	for (auto object : _objects) 
+		object->draw();
 
 	SDL_RenderPresent(_renderer);
 }
@@ -79,7 +72,7 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
-	for (auto object : objects)
+	for (auto object : _objects)
 		object->update();
 
 }
