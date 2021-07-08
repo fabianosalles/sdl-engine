@@ -10,7 +10,9 @@ class SDLGameObject : public GameObject {
 public:
 	SDLGameObject(const LoaderParams* params)
 		: GameObject(params),
-		  position(params->x, params->y)
+		  position(params->x, params->y),
+		  velocity(0,0),
+		  accelaration(0,0)
 	{
 		w = params->w;
 		h = params->h;
@@ -29,12 +31,17 @@ public:
 			Game::instance().renderer());
 	}
 
-	virtual void update() {}
+	virtual void update() {
+		velocity += accelaration;
+		position += velocity;
+	}
 
 	virtual void clean() {}
 
 protected:
 	Vector2D position;
+	Vector2D velocity;
+	Vector2D accelaration;
 	int w, h, row, frame;
 	std::string textureID;
 };

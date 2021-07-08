@@ -7,7 +7,7 @@ Game* game = NULL;
 
 int main(int argc, char** argv) {
 	std::cout << "Game init attempt...\n";
-	if (!Game::instance().init("Chapter 1 : Setting Up SDL", 100, 100, 640, 480, false)) {
+	if (!Game::instance().init("Chapter 1 : Setting Up SDL", 100, 100, 800, 600, false)) {
 		std::cerr << "game init failure - " << SDL_GetError() << "\n";
 		return -1;
 	}

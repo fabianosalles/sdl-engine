@@ -9,7 +9,9 @@ public:
 	
 	virtual void draw() { SDLGameObject::draw(); }
 	virtual void update() { 
-		position.setX(position.getX() - 1);
+		frame = int(((SDL_GetTicks() / 100) % 6));
+		accelaration.setX(0.1);
+		SDLGameObject::update();
 	}
 	virtual void clean() { }
 };
