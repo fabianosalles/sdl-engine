@@ -3,6 +3,8 @@
 #include <string>
 #include <SDL.h>
 
+#include "Singleton.h"
+
 class TextureManager
 {
 public:
@@ -22,7 +24,7 @@ public:
 		SDL_Renderer* renderer, 
 		SDL_RendererFlip flip = SDL_FLIP_NONE);
 	
-	void drawFrame(std::string id, int x, int y, int w, int h, int riw, int frame, 
+	void drawFrame(std::string id, int x, int y, int w, int h, int row, int frame, 
 		SDL_Renderer* renderer, 
 		SDL_RendererFlip flip = SDL_FLIP_NONE);
 
@@ -30,4 +32,3 @@ private:
 	TextureManager() {}
 	std::map<std::string, SDL_Texture*> _textures;
 };
-

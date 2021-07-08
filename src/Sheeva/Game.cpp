@@ -32,6 +32,17 @@ bool Game::init(const char* title, int x, int y, int w, int h, bool fullscreen) 
 	std::cout << "Loading assets...\n";
 	TextureManager::instance().load("assets/animate-alpha.png", "animate", _renderer);
 
+	player = new Player();
+	go = new GameObject();
+	enemy = new Enemy();
+
+	player->load(100, 100, 128, 82, "animate");
+	go->load(300, 300, 128, 82, "animate");
+	enemy->load(0, 0, 128, 82, "animate");
+
+	objects.push_back(player);
+	objects.push_back(go);
+	objects.push_back(enemy);
 
 	_running = true;
 	return true;
@@ -40,8 +51,8 @@ bool Game::init(const char* title, int x, int y, int w, int h, bool fullscreen) 
 void Game::render() {
 	SDL_RenderClear(_renderer);
 
-	TextureManager::instance().draw("animate", 0, 0, 128, 82, _renderer);
-	TextureManager::instance().drawFrame("animate", 100, 100, 128, 82, 1, _currentFrame, _renderer);
+	for (auto object : objects) 
+		object->draw(_renderer);
 
 	SDL_RenderPresent(_renderer);
 }
@@ -68,5 +79,7 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
-	_currentFrame = int(((SDL_GetTicks() / 100) % 6));
+	for (auto object : objects)
+		object->update();
+
 }

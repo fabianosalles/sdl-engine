@@ -1,6 +1,11 @@
 #pragma once
 
+#include "GameObject.h"
+#include "Player.h"
+#include "Enemy.h"
+
 #include <SDL.h>
+#include <vector>
 
 class Game
 {
@@ -18,6 +23,11 @@ private:
 	bool _running;
 	SDL_Window* _window;
 	SDL_Renderer* _renderer;
+
+	std::vector<GameObject*> objects;
+	GameObject* go;
+	GameObject* player;
+	Enemy* enemy;
 
 	int _currentFrame;
 };
