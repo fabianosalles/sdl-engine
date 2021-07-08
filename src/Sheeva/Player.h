@@ -8,6 +8,8 @@ public:
 	Player(const LoaderParams* params) : SDLGameObject(params) { };
 	
 	virtual void draw() { SDLGameObject::draw(); }
-	virtual void update() { x -= 1; }
+	virtual void update() { 
+		position.setX(position.getX() - 1);
+	}
 	virtual void clean() { }
 };

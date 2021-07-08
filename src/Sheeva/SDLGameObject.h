@@ -4,13 +4,14 @@
 #include "GameObject.h"
 #include "LoaderParams.h"
 #include "TextureManager.h"
+#include "Vector2D.h"
 
 class SDLGameObject : public GameObject {
 public:
 	SDLGameObject(const LoaderParams* params)
-		: GameObject(params) {
-		x = params->x;
-		y = params->y;
+		: GameObject(params),
+		  position(params->x, params->y)
+	{
 		w = params->w;
 		h = params->h;
 		textureID = params->textureID;
@@ -21,7 +22,10 @@ public:
 	virtual void draw() {
 
 		TextureManager::instance().drawFrame(
-			textureID, x, y, w, h, row, frame,
+			textureID, 
+			(int)position.getX(),
+			(int)position.getY(),
+			w, h, row, frame,
 			Game::instance().renderer());
 	}
 
@@ -30,6 +34,7 @@ public:
 	virtual void clean() {}
 
 protected:
-	int x, y, w, h, row, frame;
+	Vector2D position;
+	int w, h, row, frame;
 	std::string textureID;
 };
