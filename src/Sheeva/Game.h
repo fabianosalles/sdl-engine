@@ -23,6 +23,7 @@ public:
 	void update();
 	void handleEvents();
 	void clean();
+	void quit() { _running = false;  }
 	bool running() const { return _running; }
 	SDL_Renderer* renderer() const { return _renderer; }
 private:

@@ -1,4 +1,5 @@
 #pragma once
+#pragma warning( disable : 4305 ) 
 
 #include "SDLGameObject.h"
 #include "LoaderParams.h"

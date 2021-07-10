@@ -2,6 +2,7 @@
 
 #include "Game.h"
 #include "TextureManager.h"
+#include "InputHandler.h"
 #include "Player.h"
 #include "Enemy.h"
 
@@ -29,6 +30,8 @@ bool Game::init(const char* title, int x, int y, int w, int h, bool fullscreen) 
 	}
 	SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255);
 
+	InputHandler::instance().initJoysticks();
+
 	std::cout << "SDL init success\n";
 
 	std::cout << "Loading assets...\n";
@@ -52,23 +55,15 @@ void Game::render() {
 
 void Game::clean() {
 	std::cout << "cleaning game...\n";
+	InputHandler::instance().clean();
 	SDL_DestroyWindow(_window);
 	SDL_DestroyRenderer(_renderer);
 	SDL_Quit();
 }
 
 void Game::handleEvents() {
-	SDL_Event event;
-	if (SDL_PollEvent(&event)) {
-		switch (event.type)
-		{
-		case SDL_QUIT:
-			_running = false;
-			break;
-		default:
-			break;
-		}
-	}
+	InputHandler::instance().update();
+	
 }
 
 void Game::update() {
