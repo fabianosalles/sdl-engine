@@ -9,10 +9,9 @@ public:
 	Player(const LoaderParams* params) : SDLGameObject(params) { };
 	
 	virtual void draw() { SDLGameObject::draw(); }
-	virtual void update() { 
-		frame = int(((SDL_GetTicks() / 100) % 6));
-		accelaration.setX(0.1);
-		SDLGameObject::update();
-	}
+	virtual void update();
 	virtual void clean() { }
+
+private:
+	void handleInput();
 };
