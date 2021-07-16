@@ -19,41 +19,80 @@ InputHandler::InputHandler() {
 		_mouseButtons.push_back(false);
 }
 
+void InputHandler::onMouseMove(SDL_Event& event) {
+	_mousePosition->setX(event.motion.x);
+	_mousePosition->setY(event.motion.y);
+}
+
+void InputHandler::onMouseDown(SDL_Event& event) {
+	if (event.button.button == SDL_BUTTON_LEFT)
+		_mouseButtons[MouseButton::LEFT] = true;
+
+	if (event.button.button == SDL_BUTTON_MIDDLE)
+		_mouseButtons[MouseButton::MIDDLE] = true;
+
+	if (event.button.button == SDL_BUTTON_RIGHT)
+		_mouseButtons[MouseButton::RIGHT] = true;
+}
+
+void InputHandler::onMouseUp(SDL_Event& event) {
+	if (event.button.button == SDL_BUTTON_LEFT)
+		_mouseButtons[MouseButton::LEFT] = false;
+
+	if (event.button.button == SDL_BUTTON_MIDDLE)
+		_mouseButtons[MouseButton::MIDDLE] = false;
+
+	if (event.button.button == SDL_BUTTON_RIGHT)
+		_mouseButtons[MouseButton::RIGHT] = false;
+}
+
+void InputHandler::onKeyUp() {
+	_keyboardState = SDL_GetKeyboardState(0);
+}
+
+void InputHandler::onKeyDown() {
+	_keyboardState = SDL_GetKeyboardState(0);
+}
+
+
 void InputHandler::update() {
 	_keyboardState = SDL_GetKeyboardState(0);
 
 	SDL_Event event;
 	while (SDL_PollEvent(&event)) {
-		if (event.type == SDL_QUIT)
+
+		switch (event.type)
+		{
+		case SDL_QUIT:
 			Game::instance().quit();
+			break;
 
-		if (event.type == SDL_MOUSEBUTTONDOWN) {
-			if (event.button.button == SDL_BUTTON_LEFT)
-				_mouseButtons[MouseButton::LEFT] = true;
+		case SDL_MOUSEBUTTONDOWN:
+			onMouseDown(event);
+			break;
 
-			if (event.button.button == SDL_BUTTON_MIDDLE)
-				_mouseButtons[MouseButton::MIDDLE] = true;
+		case SDL_MOUSEBUTTONUP:
+			onMouseUp(event);
+			break;
 
-			if (event.button.button == SDL_BUTTON_RIGHT)
-				_mouseButtons[MouseButton::RIGHT] = true;
+		case SDL_MOUSEMOTION:
+			onMouseMove(event);
+			break;
+
+		case SDL_KEYDOWN:
+			onKeyDown();
+			break;
+
+		case SDL_KEYUP:
+			onKeyUp();
+			break;	
+
+		default:
+			break;
 		}
 
-		if (event.type == SDL_MOUSEBUTTONUP) {
-			if (event.button.button == SDL_BUTTON_LEFT)
-				_mouseButtons[MouseButton::LEFT] = false;
-
-			if (event.button.button == SDL_BUTTON_MIDDLE)
-				_mouseButtons[MouseButton::MIDDLE] = false;
-
-			if (event.button.button == SDL_BUTTON_RIGHT)
-				_mouseButtons[MouseButton::RIGHT] = false;
-		}
-
-		if (event.type == SDL_MOUSEMOTION) {
-			_mousePosition->setX(event.motion.x);
-			_mousePosition->setY(event.motion.y);
-		}
-
+		
+		//todo: incorporate this event in the switch statement
 		if (event.type == SDL_JOYBUTTONDOWN) {
 			_joyButtons[event.jaxis.which][event.jbutton.button] = true;
 		}

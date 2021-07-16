@@ -44,4 +44,13 @@ private:
 	std::vector<bool> _mouseButtons;
 	Vector2D* _mousePosition = new Vector2D(0,0);
 	const Uint8* _keyboardState;
+
+	//keyboard events
+	void onKeyUp();
+	void onKeyDown();
+
+	// mouse events
+	void onMouseMove(SDL_Event& event);
+	void onMouseDown(SDL_Event& event);
+	void onMouseUp(SDL_Event& event);
 };
