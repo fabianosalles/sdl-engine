@@ -50,4 +50,8 @@ void TextureManager::drawFrame(std::string id, int x, int y, int w, int h, int r
     SDL_RenderCopyEx(renderer, _textures[id], &src, &dst, 0, 0, flip);
 }
 
+void TextureManager::remove(const std::string id) {
+    _textures.erase(id);
+}
+
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameObject.h"
+#include "GameStateMachine.h"
 #include <SDL.h>
 #include <vector>
 
@@ -31,6 +32,6 @@ private:
 	bool _running;
 	SDL_Window* _window;
 	SDL_Renderer* _renderer;
-	std::vector<GameObject*> _objects;
+	GameStateMachine* _state;
 };
 

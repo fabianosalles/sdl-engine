@@ -1,0 +1,16 @@
+#pragma once
+
+#include <vector>
+#include "GameState.h"
+
+class GameStateMachine {
+public:
+	void push(GameState* state);
+	void change(GameState* state);
+	void pop(GameState* state);
+
+	void update();
+	void render();
+private:
+	std::vector<GameState*> states;
+};
