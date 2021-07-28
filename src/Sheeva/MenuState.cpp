@@ -3,8 +3,10 @@
 #include "TextureManager.h"
 #include "Game.h"
 #include "MenuButton.h"
+#include "PlayState.h"
 
 const std::string MenuState::menuID = "MENU";
+
 
 void MenuState::update() {
 	for (auto object : objects) {
@@ -31,8 +33,8 @@ void MenuState::render() {
 		 return false;
 	 }
 
-	 objects.push_back(new MenuButton(new LoaderParams(100, 100, 400, 100, "btn-play")));
-	 objects.push_back(new MenuButton(new LoaderParams(100, 300, 400, 100, "btn-exit")));
+	 objects.push_back(new MenuButton(new LoaderParams(100, 100, 400, 100, "btn-play"), onPlayClicked));
+	 objects.push_back(new MenuButton(new LoaderParams(100, 300, 400, 100, "btn-exit"), onExitClicked));
 	 
 	 return true;
 }
@@ -48,3 +50,13 @@ void MenuState::render() {
 	 
 	 return true;
 }
+
+ void MenuState::onPlayClicked() {
+	 std::cout << "Play button clicked\n";
+	 Game::instance().state()->change(new PlayState());
+ }
+
+ void MenuState::onExitClicked() {
+	 std::cout << "Exit button clicked\n";
+	 Game::instance().quit();
+ }

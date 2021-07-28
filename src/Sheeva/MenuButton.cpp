@@ -5,9 +5,11 @@
 
 
 
-MenuButton::MenuButton(const LoaderParams* params) :
+MenuButton::MenuButton(const LoaderParams* params, void(*callback)()) :
 	SDLGameObject(params),
-	state(ButtonState::MouseOut)
+	_callback(callback),
+	_state(ButtonState::MouseOut),
+	_released(true)
 {
 	
 }
@@ -25,13 +27,21 @@ void MenuButton::update() {
 	if ((x < (position.getX() + w)) && (x > (position.getX())) &&
 		(y < (position.getY() + h)) && (y > (position.getY())))
 	{
-		state = (InputHandler::instance().mouseButton(MouseButton::LEFT))
-			? ButtonState::Clicked
-			: ButtonState::MouseOver;
+		if (InputHandler::instance().mouseButton(MouseButton::LEFT) && _released) {
+			_state = ButtonState::Clicked;
+			if (_callback != nullptr)
+				_callback();
+			_released = false;
+		}
+		else
+			if (!InputHandler::instance().mouseButton(MouseButton::LEFT)) {
+				_released = true;
+				ButtonState::MouseOver;
+			}
 	}
 	else
-		state = ButtonState::MouseOut;
-	frame = (int)state;
+		_state = ButtonState::MouseOut;
+	frame = (int)_state;
 }
 
 void MenuButton::clean() {

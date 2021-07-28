@@ -15,4 +15,7 @@ public:
 private:
 	const static std::string menuID;
 	std::vector<GameObject*> objects;
+
+	static void onPlayClicked();
+	static void onExitClicked();
 };

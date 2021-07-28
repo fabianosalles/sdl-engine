@@ -27,6 +27,7 @@ public:
 	void quit() { _running = false;  }
 	bool running() const { return _running; }
 	SDL_Renderer* renderer() const { return _renderer; }
+	GameStateMachine* state() { return _state; }
 private:
 	Game(){}
 	bool _running;

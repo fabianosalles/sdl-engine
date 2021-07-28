@@ -1,5 +1,7 @@
 #pragma once
+#include "GameObject.h"
 #include "GameState.h"
+#include <vector>
 
 class PlayState : public GameState {
 public:
@@ -9,8 +11,9 @@ public:
 	virtual bool onEnter();
 	virtual bool onExit();
 
-	virtual std::string stateID() const { return playID; }
+	virtual std::string stateID() { return playID; }
 private:
 	static const std::string playID;
+	std::vector<GameObject*> objects;
 };
 

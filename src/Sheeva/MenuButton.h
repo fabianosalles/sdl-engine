@@ -9,13 +9,17 @@ enum ButtonState {
 	Clicked = 2
 };
 
+
 class MenuButton : public SDLGameObject {
 public:
-	MenuButton(const LoaderParams*);
+	MenuButton(const LoaderParams*, void (*callback)());
 
 	virtual void draw();
 	virtual void update();
 	virtual void clean();
+
 private:
-	ButtonState state;
+	ButtonState _state;
+	bool _released;
+	void(*_callback)();
 };
