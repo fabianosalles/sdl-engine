@@ -10,5 +10,5 @@ public:
 	virtual bool onEnter() = 0;
 	virtual bool onExit() = 0;
 
-	virtual std::string stateID() = 0;
+	virtual std::string stateID() { return "GAME"; }
 };

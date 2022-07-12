@@ -6,7 +6,7 @@ void GameStateMachine::push(GameState* state)
 	states.back()->onEnter();
 }
 
-void GameStateMachine::pop(GameState* state)
+void GameStateMachine::pop()
 {
 	if (!states.empty()) {
 		if (states.back()->onExit()) {

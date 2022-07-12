@@ -206,3 +206,7 @@ int InputHandler::joyY(int joy, int stick) {
 	}
 	return 0;
 }
+
+void InputHandler::reset() {
+    for (auto b : _mouseButtons) b = false;
+}

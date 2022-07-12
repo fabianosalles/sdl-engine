@@ -34,6 +34,7 @@ public:
 	Vector2D& mousePosition() { return *_mousePosition;  }
 
 	bool keyDown(SDL_Scancode key);
+    void reset();
 private:
 	InputHandler();
 
