@@ -10,7 +10,7 @@ include_directories(src/Sheeva)
 file(GLOB SOURCES "src/Sheeva/*.cpp")
 
 project(sheeva)
-    add_executable(sheeva src/Sheeva/main.cpp ${SOURCES} src/Sheeva/PauseState.cpp src/Sheeva/PauseState.h)
+    add_executable(sheeva src/Sheeva/main.cpp ${SOURCES})
     add_dependencies(sheeva copy_assets)
     target_link_libraries(sheeva SDL2 SDL2main SDL2_mixer SDL2_image)
     target_link_libraries(sheeva SDL2 SDL2main SDL2_mixer SDL2_image)

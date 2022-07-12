@@ -4,7 +4,15 @@
 #include "Player.h"
 #include "InputHandler.h"
 #include "PauseState.h"
+#include "Enemy.h"
 #include <iostream>
+
+using namespace std;
+
+const map<string, string> PlayState::_textures = {
+        {"helicopter", "assets/helicopter.png"},
+        {"helicopter2", "assets/helicopter2.png"}
+};
 
 const std::string PlayState::playID = "PLAY";
 
@@ -23,12 +31,15 @@ void PlayState::render() {
 }
 
 bool PlayState::onEnter() {
-	if (!TextureManager::instance().load("assets/helicopter.png", "helicopter", Game::instance().renderer())) {
-		return false;
-	}
+    for(auto entry : _textures) {
+        if (!TextureManager::instance().load(entry.second, entry.first, Game::instance().renderer())) {
+            cerr << "Could not load " << entry.second << endl;
+            return false;
+        }
+    }
 
-	auto player = new Player(new LoaderParams(100, 100, 128, 55, "helicopter"));
-	objects.push_back(player);
+    objects.push_back(new Player(new LoaderParams(100, 100, 128, 55, "helicopter")));
+    objects.push_back(new Enemy(new LoaderParams(100, 100, 128, 55, "helicopter2")));
 
     std::cout << "entering PlayState\n";
 	return true;

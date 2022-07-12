@@ -3,15 +3,13 @@
 #include "SDLGameObject.h"
 #include "LoaderParams.h"
 
+using namespace std;
+
 class Enemy : public SDLGameObject {
 public:
-	Enemy(const LoaderParams* params) : SDLGameObject(params) { };
-
-	virtual void draw() { SDLGameObject::draw(); }
-	virtual void update() { 
-		position.setX(position.getX() + 1);
-		position.setY(position.getY() + 1);
-	}
-	virtual void clean() {  }
+	Enemy(const LoaderParams* params);
+	virtual void draw();
+	virtual void update();
+	virtual void clean();
 };
 
