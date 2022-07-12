@@ -36,3 +36,5 @@
 **/.vs
 **/Debug/
 **/*.vcxproj.user
+cmake-build-debug
+.idea/
