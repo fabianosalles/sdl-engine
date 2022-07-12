@@ -1,9 +1,9 @@
 #include <iostream>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include "Game.h"
 
-
-Game* game = NULL;
+const int FPS = 60;
+const int FRAME_DELAY = 1000.0f / FPS;
 
 int main(int argc, char** argv) {
 	std::cout << "Game init attempt...\n";
@@ -13,13 +13,20 @@ int main(int argc, char** argv) {
 	}
 
 	std::cout << "game init success!\n";
+	
+	Uint32 frameStart, frameTime;
 	while (Game::instance().running())
 	{
+		frameStart = SDL_GetTicks();
+
 		Game::instance().handleEvents();
 		Game::instance().update();
 		Game::instance().render();
 
-		SDL_Delay(10);
+		frameTime = SDL_GetTicks() - frameStart;
+		if (frameTime < FRAME_DELAY) {
+			SDL_Delay((int)(FRAME_DELAY - frameTime));
+		}
 	}
 	std::cout << "game closing...\n";
 	Game::instance().clean();

@@ -1,7 +1,7 @@
 #pragma once
 #include <map>
 #include <string>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 
 #include "Singleton.h"
 
@@ -27,6 +27,8 @@ public:
 	void drawFrame(std::string id, int x, int y, int w, int h, int row, int frame, 
 		SDL_Renderer* renderer, 
 		SDL_RendererFlip flip = SDL_FLIP_NONE);
+
+	void remove(const std::string id);
 
 private:
 	TextureManager() {}

@@ -1,4 +1,5 @@
 #pragma once
+#pragma warning( disable : 4305 ) 
 
 #include "SDLGameObject.h"
 #include "LoaderParams.h"
@@ -8,6 +9,9 @@ public:
 	Player(const LoaderParams* params) : SDLGameObject(params) { };
 	
 	virtual void draw() { SDLGameObject::draw(); }
-	virtual void update() { x -= 1; }
+	virtual void update();
 	virtual void clean() { }
+
+private:
+	void handleInput();
 };

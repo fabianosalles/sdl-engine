@@ -1,7 +1,8 @@
 #pragma once
 
 #include "GameObject.h"
-#include <SDL.h>
+#include "GameStateMachine.h"
+#include <SDL2/SDL.h>
 #include <vector>
 
 class Game
@@ -23,13 +24,15 @@ public:
 	void update();
 	void handleEvents();
 	void clean();
+	void quit() { _running = false;  }
 	bool running() const { return _running; }
 	SDL_Renderer* renderer() const { return _renderer; }
+	GameStateMachine* state() { return _state; }
 private:
 	Game(){}
 	bool _running;
 	SDL_Window* _window;
 	SDL_Renderer* _renderer;
-	std::vector<GameObject*> _objects;
+	GameStateMachine* _state;
 };
 

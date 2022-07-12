@@ -1,5 +1,5 @@
 #include "TextureManager.h"
-#include <SDL_image.h>
+#include <SDL2/SDL_image.h>
 #include <iostream>
 
 bool TextureManager::load(std::string fileName, std::string id, SDL_Renderer* renderer)
@@ -48,6 +48,10 @@ void TextureManager::drawFrame(std::string id, int x, int y, int w, int h, int r
     dst.x = x;
     dst.y = y;
     SDL_RenderCopyEx(renderer, _textures[id], &src, &dst, 0, 0, flip);
+}
+
+void TextureManager::remove(const std::string id) {
+    _textures.erase(id);
 }
 
 
