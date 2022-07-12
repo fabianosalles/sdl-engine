@@ -17,7 +17,6 @@ void PlayState::render() {
 }
 
 bool PlayState::onEnter() {
-	std::cout << "entering PlayState\n";
 	if (!TextureManager::instance().load("assets/helicopter.png", "helicopter", Game::instance().renderer())) {
 		return false;
 	}
@@ -25,14 +24,16 @@ bool PlayState::onEnter() {
 	auto player = new Player(new LoaderParams(100, 100, 128, 55, "helicopter"));
 	objects.push_back(player);
 
+    std::cout << "entering PlayState\n";
 	return true;
 }
+
 bool PlayState::onExit() {
-	std::cout << "exiting PlayState\n";
 	for (auto obj : objects)
 		obj->clean();
 
 	objects.clear();
 	TextureManager::instance().remove("helicopter");
-	return true;
+    std::cout << "exiting PlayState\n";
+    return true;
 }

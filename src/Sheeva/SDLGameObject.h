@@ -25,15 +25,13 @@ public:
 	}
 
 	virtual void draw() {
-		
-		SDL_RendererFlip flip = velocity.getX() > 0 ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
-
 		TextureManager::instance().drawFrame(
 			textureID, 
 			(int)position.getX(),
 			(int)position.getY(),
 			w, h, row, frame,
-			Game::instance().renderer(), flip);
+			Game::instance().renderer(),
+            velocity.getX() > 0 ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
 	}
 
 	virtual void update() {

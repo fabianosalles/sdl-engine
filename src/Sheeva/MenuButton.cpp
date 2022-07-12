@@ -14,8 +14,6 @@ MenuButton::MenuButton(const LoaderParams* params, void(*callback)()) :
 	
 }
 
-
-
 void MenuButton::draw() {
 	SDLGameObject::draw();
 }
@@ -36,7 +34,7 @@ void MenuButton::update() {
 		else
 			if (!InputHandler::instance().mouseButton(MouseButton::LEFT)) {
 				_released = true;
-				ButtonState::MouseOver;
+                _state = ButtonState::MouseOver;
 			}
 	}
 	else
