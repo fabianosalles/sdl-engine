@@ -2,7 +2,7 @@
 
 #include "GameObject.h"
 #include "GameStateMachine.h"
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <vector>
 
 class Game

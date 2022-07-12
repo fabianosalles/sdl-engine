@@ -1,7 +1,6 @@
 #include <iostream>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include "Game.h"
-#include <Windows.h>
 
 const int FPS = 60;
 const int FRAME_DELAY = 1000.0f / FPS;
